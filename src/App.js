@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
 
 function App() {
   return (
     <>
-      Hello world
+      
     </>
   );
 }
