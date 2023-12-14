@@ -1,7 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, Card, CardContent, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { login } from "../../../apis/auth";
+import { authLogin } from "../../../apis/auth";
 import { showsuccess } from "../../../helpers/toast";
 
 function Login() {
@@ -21,9 +21,7 @@ function Login() {
             console.log("errr")
         }else {
             console.log({email, password})
-            login(email, password).then((res)=> {
-                showsuccess("logged in")
-            })
+            authLogin(email, password)
         }
     }
     return (
@@ -31,7 +29,7 @@ function Login() {
             <Box display={'flex'} justifyContent={'center'}>
                 <Card borderRadius={5} padding={10}>
                     <CardContent padding={5}>
-                        <Typography variant="h4">Sign up </Typography>
+                        <Typography variant="h4">Sign in </Typography>
                         <Box fullWidth={true} padding={1}>
                             <TextField fullWidth={true} error={email === ''} onChange={(e) => setEmail(e.target.value)} value={email} required id="email" label="Email" variant="outlined" />
                         </Box>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { catchGeneralError } from '../helpers/toast';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
@@ -41,15 +42,13 @@ export function signup(Email, FirstName, LastName, Password){
     return axios.post(`/signup`, {Email, FirstName, LastName, Password})
 }
 
-export function login(Email, Password){
+export function authLogin(Email, Password){
     axios.post(`/login`, {Email, Password}).then((res) => {
-        const token = res.data.access_token;
-        console.log(token)
-        // setAuthToken(token);
-        // saveToken(token);
-        // saveUserData(res.data.user_info);
+        console.log(res.data)
+        const token = res.data.token;
+        setAuthToken(token);
+        saveToken(token);
+        saveUserData(res.data.user);
         window.location.href = "/";
-    }, err => {
-        console.error(err)
-    })
+    }).catch(catchGeneralError)
 }
