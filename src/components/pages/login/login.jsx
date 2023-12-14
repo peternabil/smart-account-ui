@@ -26,7 +26,7 @@ function Login() {
     }
     return (
         <>
-            <Box display={'flex'} justifyContent={'center'}>
+            <Box padding={4} display={'flex'} justifyContent={'center'}>
                 <Card borderRadius={5} padding={10}>
                     <CardContent padding={5}>
                         <Typography variant="h4">Sign in </Typography>

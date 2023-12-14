@@ -1,12 +1,13 @@
-import { Box } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "../../ui/navbar/navbar";
 
 function Main() {
     return (
-        <Box padding={2}>
+        <>
+            <Navbar />
             <Outlet />
-        </Box>
+        </>
     )
 
 }
