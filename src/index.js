@@ -3,16 +3,39 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  RouterProvider,
-} from "react-router-dom";
-import { router } from './routes';
+import { Outlet } from "react-router-dom";
+import Routers from "./routes"
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-     {/* <RouterProvider router={router} /> */}
-  </React.StrictMode>
+  <>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Routers/>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          pauseOnHover={false}
+          theme="colored"
+          limit={1}
+        />
+      </ThemeProvider>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
