@@ -2,8 +2,8 @@ import { catchGeneralError } from "../helpers/toast";
 import axios from "./axios-default";
 
 
-export function getTransactions(){
-    return axios.get("/api/transaction").catch(catchGeneralError)
+export function getTransactions(page, pageSize){
+    return axios.get(`/api/transaction?page=${page}&page_size=${pageSize}`).catch(catchGeneralError)
 }
 
 export function getTransaction(id){

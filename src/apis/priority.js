@@ -11,9 +11,9 @@ export function getPriority(id){
 }
 
 export function createPriority(Name, Description, Level){
-    return axios.post('api/priority', {Title, Description, Level}).catch(catchGeneralError)
+    return axios.post('api/priority', {Name, Description, Level}).catch(catchGeneralError)
 }
 
-export function editPriority(Title, Description, Level){
-    return axios.put('api/priority', {Title, Description, Level}).catch(catchGeneralError)
+export function editPriority(Name, Description, Level){
+    return axios.put('api/priority', {Name, Description, Level}).catch(catchGeneralError)
 }

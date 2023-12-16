@@ -5,6 +5,7 @@ import Main from "./components/pages/main/main";
 import Login from "./components/pages/login/login";
 import RouteGuard from "./helpers/route-guard";
 import { isLoggedIn } from "./apis/auth";
+import Transactions from "./components/pages/transactions/transactions";
 
 function Routers() {
   return (
@@ -19,6 +20,11 @@ function Routers() {
             }
           >
             <Route path="/app" element={<App />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/analatics" element={<App />} />
+            <Route path="/profile" element={<App />} />
+            <Route path="/account" element={<App />} />
+            <Route path="/dashboard" element={<App />} />
           </Route>
         </Route>
       </Routes>

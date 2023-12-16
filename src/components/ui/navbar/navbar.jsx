@@ -11,12 +11,37 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import MoneySharpIcon from '@mui/icons-material/MoneySharp';
 import { getUserInfo, signOut } from "../../../apis/auth";
+import { useNavigate } from 'react-router-dom';
 
 
-const pages = ['Transactions', 'Analatics'];
-const settings = ['Profile', 'Account', 'Dashboard'];
+// const pages = ['Transactions', 'Analatics'];
+// const settings = ['Profile', 'Account', 'Dashboard'];
+const pages = [
+  {
+    name: "Transactions",
+    route: "transactions"
+  },
+  {
+    name: "Analatics",
+    route: "analatics"
+  },
+];
+const settings = [
+  {
+    name: "Profile",
+    route: "profile"
+  },
+  {
+    name: "Account",
+    route: "account"
+  },
+  {
+    name: "Dashboard",
+    route: "dashboard"
+  },
+];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,7 +50,10 @@ function Navbar() {
   React.useEffect(()=> {
     setUser(getUserInfo())
   }, [])
-
+  const navigate = useNavigate()
+  const handleReroute = (route) => {
+    navigate(route)
+  }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,7 +73,7 @@ function Navbar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <MoneySharpIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -61,7 +89,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Smart wallet
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,13 +122,13 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={() => handleReroute(page.route)}>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <MoneySharpIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -117,16 +145,16 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Smart wallet
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={() => handleReroute(page.route)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
@@ -154,8 +182,8 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.name} onClick={() => handleReroute(setting.route)}>
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
                <MenuItem key={'logout'} onClick={signOut}>
