@@ -8,11 +8,13 @@ export function CreateCols(data, ignoreList, order) {
     order.forEach(firstKey => {
         res.push({ id: firstKey, label: firstKey, minWidth: 170, type: typeof data[0][firstKey] })
     })
-    Object.keys(data[0]).forEach(key => {
-        console.log(ignoreList.find((val) => val.toLowerCase() === key.toLowerCase()))
-        
+    Object.keys(data[0]).forEach(key => {        
         if (!ignoreList.find((val) => val === key) && !order.find((val) => val === key)){
             let col = { id: key, label: key, minWidth: 170,  }
+            if (key === 'Negative') {
+                col.id = 'Negative'
+                col.label = 'IN/OUT'
+            }
             if (key === 'CreatedAt') {
                 col.type = 'date'
             }else {

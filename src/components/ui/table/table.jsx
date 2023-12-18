@@ -8,10 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
-import CheckIcon from '@mui/icons-material/Check';
-import ClearIcon from '@mui/icons-material/Clear';
 import { formatDate } from '../../../helpers/utils';
-
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 
 function StyledTable({columns, rows, changePage, changeRowsPerPage}) {
   const [page, setPage] = React.useState(0);
@@ -27,11 +26,10 @@ function StyledTable({columns, rows, changePage, changeRowsPerPage}) {
     setPage(0);
     changeRowsPerPage(+event.target.value)
   };
-  console.log(columns)
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ height: 700 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -48,7 +46,6 @@ function StyledTable({columns, rows, changePage, changeRowsPerPage}) {
           </TableHead>
           <TableBody>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.ID}>
@@ -57,7 +54,7 @@ function StyledTable({columns, rows, changePage, changeRowsPerPage}) {
                       return (
                         <TableCell key={column.id} align={column.align}>
                             {column.type === 'number' ? <Box color={'green'}>{value}</Box> : null}
-                            {column.type === 'boolean' ? value === false ? <Box color={'red'}><CheckIcon /></Box> : <Box color={'green'}><ClearIcon /></Box> : null}
+                            {column.type === 'boolean' ? value === true ? <Box color={'red'}><RemoveIcon /></Box> : <Box color={'green'}><AddIcon /></Box> : null}
                             {column.type === 'string' ? <Box>{value.toString()}</Box> : null}
                             {column.type === 'date' ? <Box>{formatDate(value)}</Box> : null}
                         </TableCell>
@@ -72,7 +69,7 @@ function StyledTable({columns, rows, changePage, changeRowsPerPage}) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={-1}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

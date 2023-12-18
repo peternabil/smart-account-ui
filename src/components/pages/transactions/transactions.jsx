@@ -30,7 +30,7 @@ function Transactions(){
 
     const [pageSize, setPageSize] = useState(10)
     const nextPage = (p) => {
-        getTransactionsCall(p, pageSize)
+        getTransactionsCall(p+1, pageSize)
     }
     const changePageSx = (ps) => {
         setPageSize(ps)
@@ -38,35 +38,29 @@ function Transactions(){
     }
     const getTransactionsCall = (p, ps) => {
         getTransactions(p,ps).then((res)=> {
-            console.log(res.data.transactions);
             const mappedTransactions = res.data.transactions.map((t) => {
-                console.log(t.Category.Name)
-                console.log(t.Priority.Name)
                 return {
                     ...t,
                     Category: t.Category.Name,
                     Priority: t.Priority.Name,
                 }
             });
-            console.log(mappedTransactions);
             setColumns(CreateCols(mappedTransactions, IgnoreList, TableOrder));
             setRows(mappedTransactions);
         })
     }
     const getCategoriesCall = () => {
         getCategories().then((res)=> {
-            console.log(res.data.categories);
             setCategories(res.data.categories);
         })
     }
     const getPrioritiesCall = () => {
         getPriorities().then((res)=> {
-            console.log(res.data.priorities);
             setPriorities(res.data.priorities);
         })
     }
     useEffect(() => {
-        getTransactionsCall(1,10);
+        getTransactionsCall(0,10);
         getCategoriesCall()
         getPrioritiesCall()
     }, [])
@@ -88,7 +82,7 @@ function Transactions(){
     const createTrans = () => {
         if (isValid()){
             console.log({title, category, amount, negative, description, priority})
-            createTransaction(title, category.ID, parseInt(amount), negative === 'false'? false : true, description, priority.ID).then((res) => {
+            createTransaction(title, category.ID, parseInt(amount), negative, description, priority.ID).then((res) => {
                 console.log(res)
                 getTransactionsCall(1,10)
                 setOpen(false)
@@ -97,8 +91,8 @@ function Transactions(){
     }
     return (
         <> 
-            <Box>
-                <Box display={'flex'} justifyContent={'space-between'} p={1}>
+            <Box p={1}>
+                <Box display={'flex'} justifyContent={'space-between'} marginTop={2} marginBottom={4}>
                     <Typography variant={"h4"}>
                         Transactions
                     </Typography>
@@ -107,7 +101,7 @@ function Transactions(){
                             <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={(e, newValue) => setTitle(e.target.value)} />
                             <TextField fullWidth multiline id="description" label="Description" variant="outlined" value={description} onChange={(e, newValue) => setDescription(e.target.value)} />
                             <TextField id="amount" type={'number'} label="Amount" variant="outlined" value={amount} onChange={(e, newValue) => setAmount(e.target.value)} />
-                            <FormControlLabel required control={<Checkbox />} label="Negative" value={negative} onChange={(e, newValue) => setNegative(e.target.value)} />
+                            <FormControlLabel required control={<Checkbox />} label="Negative" value={negative} onChange={(e, newValue) => setNegative(newValue)} />
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
@@ -140,7 +134,7 @@ function Transactions(){
                         </Box>
                     </SimpleBackdrop>
                 </Box>
-                <Box p={1}>
+                <Box>
                     <StyledTable columns={columns} rows={rows} changePage={nextPage} changeRowsPerPage={changePageSx} />
                 </Box>
             </Box>
