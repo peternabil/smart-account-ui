@@ -91,52 +91,50 @@ function Transactions(){
     }
     return (
         <> 
-            <Box p={1}>
-                <Box display={'flex'} justifyContent={'space-between'} marginTop={2} marginBottom={4}>
-                    <Typography variant={"h4"}>
-                        Transactions
-                    </Typography>
-                    <SimpleBackdrop open={open} setOpen={setOpen}>
-                        <Box padding={2} display={'flex'} flexWrap={'wrap'} gap={3} alignItems={'center'} justifyContent={'space-between'}>
-                            <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={(e, newValue) => setTitle(e.target.value)} />
-                            <TextField fullWidth multiline id="description" label="Description" variant="outlined" value={description} onChange={(e, newValue) => setDescription(e.target.value)} />
-                            <TextField id="amount" type={'number'} label="Amount" variant="outlined" value={amount} onChange={(e, newValue) => setAmount(e.target.value)} />
-                            <FormControlLabel required control={<Checkbox />} label="Negative" value={negative} onChange={(e, newValue) => setNegative(newValue)} />
-                            <Autocomplete
-                                disablePortal
-                                id="combo-box-demo"
-                                options={categories.map((obj) => {
-                                    return {...obj, label: obj.Name}
-                                })}
-                                sx={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="Category" variant="outlined" />}
-                                value={category}
-                                onChange={(event, newValue) => {
-                                    setCategory(newValue);
-                                }}
-                            />
-                            <CreateCategory open={opencat} setOpen={setOpencat} createFn={createNewCategory} />
-                            <Autocomplete
-                                disablePortal
-                                id="combo-box-demo"
-                                options={priorities.map((obj) => {
-                                    return {...obj, label: obj.Name}
-                                })}
-                                sx={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                                value={priority}
-                                onChange={(event, newValue) => {
-                                    setPriority(newValue);
-                                }}
-                            />
-                            <CreatePriority open={openprio} setOpen={setOpenprio} createFn={createNewPriority} />
-                            <Button variant="contained" onClick={() => createTrans()}>Add Transaction</Button>
-                        </Box>
-                    </SimpleBackdrop>
-                </Box>
-                <Box>
-                    <StyledTable columns={columns} rows={rows} changePage={nextPage} changeRowsPerPage={changePageSx} />
-                </Box>
+            <Box display={'flex'} justifyContent={'space-between'} marginBottom={4}>
+                <Typography variant={"h4"}>
+                    Transactions
+                </Typography>
+                <SimpleBackdrop open={open} setOpen={setOpen}>
+                    <Box padding={2} display={'flex'} flexWrap={'wrap'} gap={3} alignItems={'center'} justifyContent={'space-between'}>
+                        <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={(e, newValue) => setTitle(e.target.value)} />
+                        <TextField fullWidth multiline id="description" label="Description" variant="outlined" value={description} onChange={(e, newValue) => setDescription(e.target.value)} />
+                        <TextField id="amount" type={'number'} label="Amount" variant="outlined" value={amount} onChange={(e, newValue) => setAmount(e.target.value)} />
+                        <FormControlLabel required control={<Checkbox />} label="Negative" value={negative} onChange={(e, newValue) => setNegative(newValue)} />
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={categories.map((obj) => {
+                                return {...obj, label: obj.Name}
+                            })}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label="Category" variant="outlined" />}
+                            value={category}
+                            onChange={(event, newValue) => {
+                                setCategory(newValue);
+                            }}
+                        />
+                        <CreateCategory open={opencat} setOpen={setOpencat} createFn={createNewCategory} />
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={priorities.map((obj) => {
+                                return {...obj, label: obj.Name}
+                            })}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
+                            value={priority}
+                            onChange={(event, newValue) => {
+                                setPriority(newValue);
+                            }}
+                        />
+                        <CreatePriority open={openprio} setOpen={setOpenprio} createFn={createNewPriority} />
+                        <Button variant="contained" onClick={() => createTrans()}>Add Transaction</Button>
+                    </Box>
+                </SimpleBackdrop>
+            </Box>
+            <Box>
+                <StyledTable columns={columns} rows={rows} changePage={nextPage} changeRowsPerPage={changePageSx} />
             </Box>
         </>
     );

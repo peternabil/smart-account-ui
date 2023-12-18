@@ -13,13 +13,14 @@ function Routers() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/" element={<Main />}>
+        <Route element={<Main />}>
           <Route
             element={
               <RouteGuard condition={isLoggedIn()} redirect={"/login"} />
             }
           >
             <Route path="/app" element={<App />} />
+            <Route path="/" element={<Transactions />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/analatics" element={<App />} />
             <Route path="/profile" element={<App />} />
