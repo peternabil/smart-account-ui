@@ -8,7 +8,7 @@ function CreatePriority({createFn, open, setOpen}){
     const [level, setLevel] = useState(1);
     
     return (
-        <SimpleBackdrop open={open} setOpen={setOpen} color={'black'}>
+        <SimpleBackdrop btntitle={"Add priority type"} open={open} setOpen={setOpen} opacity={0.9} color={'black'}>
             <TextField fullWidth value={name} onChange={(e) => setName(e.target.value)} id="name" label="Name" variant="outlined" />
             <TextField multiline fullWidth value={description} onChange={(e) => setDescription(e.target.value)} id="description" label="Discription" variant="outlined" />
                 <InputLabel htmlFor="my-input">Level</InputLabel>

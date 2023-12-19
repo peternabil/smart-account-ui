@@ -95,7 +95,7 @@ function Transactions(){
                 <Typography variant={"h4"}>
                     Transactions
                 </Typography>
-                <SimpleBackdrop open={open} setOpen={setOpen}>
+                <SimpleBackdrop btntitle={"Add transaction"} color={'black'} open={open} setOpen={setOpen} opacity={0.8}>
                     <Box padding={2} display={'flex'} flexWrap={'wrap'} gap={3} alignItems={'center'} justifyContent={'space-between'}>
                         <TextField fullWidth id="title" label="Title" variant="outlined" value={title} onChange={(e, newValue) => setTitle(e.target.value)} />
                         <TextField fullWidth multiline id="description" label="Description" variant="outlined" value={description} onChange={(e, newValue) => setDescription(e.target.value)} />

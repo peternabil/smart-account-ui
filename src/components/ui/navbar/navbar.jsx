@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoneySharpIcon from '@mui/icons-material/MoneySharp';
 import { getUserInfo, signOut } from "../../../apis/auth";
 import { useNavigate } from 'react-router-dom';
+import { Image } from '@mui/icons-material';
 
 
 // const pages = ['Transactions', 'Analatics'];
@@ -27,6 +28,10 @@ const pages = [
     name: "Analatics",
     route: "analatics"
   },
+  {
+    name: "Yearly Analatics",
+    route: "analatics-yearly"
+  }
 ];
 const settings = [
   {
@@ -181,11 +186,11 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting.name} onClick={() => handleReroute(setting.route)}>
                   <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
                <MenuItem key={'logout'} onClick={signOut}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>

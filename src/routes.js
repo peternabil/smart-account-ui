@@ -6,6 +6,7 @@ import Login from "./components/pages/login/login";
 import RouteGuard from "./helpers/route-guard";
 import { isLoggedIn } from "./apis/auth";
 import Transactions from "./components/pages/transactions/transactions";
+import Stats from "./components/pages/stats/stats";
 
 function Routers() {
   return (
@@ -22,7 +23,8 @@ function Routers() {
             <Route path="/app" element={<App />} />
             <Route path="/" element={<Transactions />} />
             <Route path="/transactions" element={<Transactions />} />
-            <Route path="/analatics" element={<App />} />
+            <Route path="/analatics" element={<Stats yearly={false} />} />
+            <Route path="/analatics-yearly" element={<Stats yearly={true} />} />
             <Route path="/profile" element={<App />} />
             <Route path="/account" element={<App />} />
             <Route path="/dashboard" element={<App />} />
